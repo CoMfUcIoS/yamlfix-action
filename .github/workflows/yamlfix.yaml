@@ -20,7 +20,7 @@ jobs:
         run: |
           echo ${{ steps.get_file_changes.outputs.files }} | xargs -n 1 | grep -E "\.yml$|\.yaml$" > changed_files.txt
           yaml_files=$(cat changed_files.txt | tr '\n' ' ')
-          echo "files=${yaml_files}" >> $GITHUB_ENV
+          echo "files=${yaml_files}" >> $GITHUB_OUTPUT
       - name: Yamlfix
         id: yamlfix
         uses: comfucios/yamlfix-action@v1.0.0
