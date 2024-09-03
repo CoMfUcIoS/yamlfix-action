@@ -1,0 +1,19 @@
+---
+name: yamlfix-action
+description: Run yamlfix against YAML files
+author: Ioannis Karasavvaidis
+branding:
+  color: green
+  icon: check-circle
+inputs:
+  files:
+    description: Files that needed to be fixed
+    required: false
+    default: .
+outputs:
+  changes_files:
+    description: Value is "true", if yamlfix changes detected
+runs:
+  using: docker
+  image: Dockerfile
+  args: ['${{ inputs.files }}']
