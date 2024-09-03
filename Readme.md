@@ -10,7 +10,7 @@ Example workflow to run the action on push:
 name: Yamlfix
 
 on:
-  push:
+  pull_request:
     branches: [main]
     paths:
       - "*.yml"
