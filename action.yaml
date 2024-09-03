@@ -11,7 +11,7 @@ inputs:
     required: false
     default: .
 outputs:
-  changes_files:
+  changed_files:
     description: Value is "true", if yamlfix changes detected
 runs:
   using: docker
