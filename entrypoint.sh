@@ -4,9 +4,9 @@ _output() {
   local value=${1}
 
   if [ -z ${GITHUB_OUTPUT+x} ]; then
-    echo "::set-output name=changes_files::$value"
+    echo "::set-output name=changed_files::$value"
   else
-    echo "changes_files=$value" >>$GITHUB_OUTPUT
+    echo "changed_files=$value" >>$GITHUB_OUTPUT
   fi
 }
 
