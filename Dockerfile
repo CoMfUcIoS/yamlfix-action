@@ -2,7 +2,9 @@ FROM python:alpine3.19
 
 RUN pip install yamlfix 
 
-COPY entrypoint.sh /entrypoint.sh
+WORKDIR /yamlfix-action
 
-ENTRYPOINT ["/entrypoint.sh"]
+COPY entrypoint.sh /yamlfix-action/entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]
 
