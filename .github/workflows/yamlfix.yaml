@@ -22,7 +22,7 @@ jobs:
           cat changed_files.txt | tr '\n' ' '
           echo "files=$(cat changed_files.txt | tr '\n' ' ')" >> GITHUB_OUTPUT
       - name: Yamlfix
-        if: ${{ steps.changed_yaml_files.output.files != "" }}
+        if: ${{ steps.changed_yaml_files.outputs.files != '' }}
         id: yamlfix
         uses: comfucios/yamlfix-action@v1.0.0
         with:
