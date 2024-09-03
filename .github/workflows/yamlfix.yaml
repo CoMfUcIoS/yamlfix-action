@@ -1,7 +1,7 @@
 ---
 name: Yamlfix
 on:
-  push:
+  pull_request:
     branches: [main]
     paths: ['*.yml', '*.yaml']
 jobs:
