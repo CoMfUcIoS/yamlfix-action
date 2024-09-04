@@ -10,6 +10,8 @@ _output() {
   fi
 }
 
+ls -lah
+
 yamlfix "$@" >/tmp/yamlfix_output 2>&1
 
 if grep -q "0 fixed" /tmp/yamlfix_output; then
