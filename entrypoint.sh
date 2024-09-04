@@ -9,7 +9,7 @@ _file_changed=false
 
 for file in "$@"; do
   echo "Fixing file $file"
-  yamlfix "$file" >/tmp/yamlfix_output
+  yamlfix $file >/tmp/yamlfix_output
   if grep -q "0 fixed" /tmp/yamlfix_output; then
     continue
   else
