@@ -13,6 +13,8 @@ inputs:
 outputs:
   changed_files:
     description: Value is "true", if yamlfix changes detected
+permissions:
+  contents: write
 runs:
   using: docker
   image: Dockerfile
