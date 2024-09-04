@@ -7,15 +7,14 @@ A Github action to fix yaml files.
 Example workflow to run the action on push:
 
 ```yaml
+---
 name: Yamlfix
-
 on:
   pull_request:
     branches: [main]
-    paths:
-      - "*.yml"
-      - "*.yaml"
-
+    paths: ["*.yml", "*.yaml"]
+permissions:
+  contents: write
 jobs:
   format-yaml-files:
     runs-on: ubuntu-latest
@@ -31,17 +30,21 @@ jobs:
         id: changed_yaml_files
         run: |
           echo ${{ steps.get_file_changes.outputs.files }} | xargs -n 1 | grep -E "\.yml$|\.yaml$" > changed_files.txt
-          cat changed_files.txt
-          ::set-output name=files::$(cat changed_files.txt)
+          yaml_files=$(cat changed_files.txt | tr '\n' ' ')
+          echo "files=${yaml_files}" >> $GITHUB_OUTPUT
       - name: Yamlfix
         id: yamlfix
-        uses: comfucios/yamlfix-action@v1.0.4
+        uses: comfucios/yamlfix-action@v1.0.5
         with:
           files: ${{ steps.changed_yaml_files.outputs.files }}
+      - name: check git
+        run: |
+          git status
+          ls -lah
       - name: commit-changes
         if: ${{ steps.yamlfix.outputs.changed_files == 'true' }}
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Apply Yamlfix changes"
-          file_pattern: "*.yml *.yaml"
+          commit_message: Apply Yamlfix changes
+          status_options: --untracked-files=no
 ```

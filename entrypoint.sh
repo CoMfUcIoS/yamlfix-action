@@ -12,6 +12,8 @@ _output() {
 
 ls -lah
 
+git status
+
 yamlfix "$@" >/tmp/yamlfix_output 2>&1
 
 if grep -q "0 fixed" /tmp/yamlfix_output; then
