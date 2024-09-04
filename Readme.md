@@ -35,7 +35,7 @@ jobs:
           ::set-output name=files::$(cat changed_files.txt)
       - name: Yamlfix
         id: yamlfix
-        uses: comfucios/yamlfix-action@v1
+        uses: comfucios/yamlfix-action@v1.0.4
         with:
           files: ${{ steps.changed_yaml_files.outputs.files }}
       - name: commit-changes
