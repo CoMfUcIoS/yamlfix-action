@@ -25,7 +25,7 @@ jobs:
           echo "files=${yaml_files}" >> $GITHUB_OUTPUT
       - name: Yamlfix
         id: yamlfix
-        uses: comfucios/yamlfix-action@v1.0.3
+        uses: comfucios/yamlfix-action@v1.0.4
         with:
           files: ${{ steps.changed_yaml_files.outputs.files }}
       - name: check git
