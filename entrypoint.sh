@@ -2,12 +2,7 @@
 
 _output() {
   local value=${1}
-
-  if [ -z ${GITHUB_OUTPUT+x} ]; then
-    echo "::set-output name=changed_files::$value"
-  else
-    echo "changed_files=$value" >>$GITHUB_OUTPUT
-  fi
+  echo "changed_files=$value" >>$GITHUB_OUTPUT
 }
 
 ls -lah
