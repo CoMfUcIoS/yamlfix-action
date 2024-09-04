@@ -4,7 +4,7 @@ RUN pip install yamlfix
 
 WORKDIR /yamlfix-action
 
-COPY entrypoint.sh /yamlfix-action/entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
