@@ -11,7 +11,7 @@ echo "$@"
 
 which yamlfix
 
-yamlfix "$@" >/tmp/yamlfix_output 2>&1
+yamlfix "$@" >/tmp/yamlfix_output
 
 cat test.yaml
 
