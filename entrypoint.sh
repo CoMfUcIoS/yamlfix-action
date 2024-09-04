@@ -5,20 +5,15 @@ _output() {
   echo "changed_files=$value" >>$GITHUB_OUTPUT
 }
 
-_file_changed=false
+files="$@"
 
-for file in "$@"; do
-  echo "Fixing file $file"
-  yamlfix $file >/tmp/yamlfix_output
-  if grep -q "0 fixed" /tmp/yamlfix_output; then
-    continue
-  else
-    _file_changed=true
-  fi
-done
-
-ls -lah
+echo "Fixing file $files"
+yamlfix $files >/tmp/yamlfix_output
 
 cat test.yaml
 
-_output $_file_changed
+if [ -s /tmp/yamlfix_output ]; then
+  _output "true"
+else
+  _output "false"
+fi
