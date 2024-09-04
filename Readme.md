@@ -15,6 +15,7 @@ on:
     paths: ["*.yml", "*.yaml"]
 permissions:
   contents: write
+  pull-requests: write
 jobs:
   format-yaml-files:
     runs-on: ubuntu-latest
@@ -34,7 +35,7 @@ jobs:
           echo "files=${yaml_files}" >> $GITHUB_OUTPUT
       - name: Yamlfix
         id: yamlfix
-        uses: comfucios/yamlfix-action@v1.0.5
+        uses: comfucios/yamlfix-action@1.0.8
         with:
           files: ${{ steps.changed_yaml_files.outputs.files }}
       - name: check git

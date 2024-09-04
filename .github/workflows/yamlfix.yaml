@@ -6,6 +6,7 @@ on:
     paths: ['*.yml', '*.yaml']
 permissions:
   contents: write
+  pull-requests: write
 jobs:
   format-yaml-files:
     runs-on: ubuntu-latest
@@ -22,10 +23,11 @@ jobs:
         run: |
           echo ${{ steps.get_file_changes.outputs.files }} | xargs -n 1 | grep -E "\.yml$|\.yaml$" > changed_files.txt
           yaml_files=$(cat changed_files.txt | tr '\n' ' ')
+          rm changed_files.txt
           echo "files=${yaml_files}" >> $GITHUB_OUTPUT
       - name: Yamlfix
         id: yamlfix
-        uses: comfucios/yamlfix-action@v1.0.6
+        uses: comfucios/yamlfix-action@1.0.8
         with:
           files: ${{ steps.changed_yaml_files.outputs.files }}
       - name: check git

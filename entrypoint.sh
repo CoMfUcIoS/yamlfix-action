@@ -1,20 +1,13 @@
 #!/bin/sh
 
 _output() {
-  local value=${1}
-
-  if [ -z ${GITHUB_OUTPUT+x} ]; then
-    echo "::set-output name=changed_files::$value"
-  else
-    echo "changed_files=$value" >>$GITHUB_OUTPUT
-  fi
+  value=${1}
+  echo "changed_files=$value" >>$GITHUB_OUTPUT
 }
 
-ls -lah
+files="$@"
 
-cat test.yaml
-
-yamlfix "$@" >/tmp/yamlfix_output 2>&1
+yamlfix $files >/tmp/yamlfix_output
 
 if grep -q "0 fixed" /tmp/yamlfix_output; then
   _output "false"
