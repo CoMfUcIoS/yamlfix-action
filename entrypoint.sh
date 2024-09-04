@@ -12,7 +12,7 @@ _output() {
 
 ls -lah
 
-git status
+cat test.yaml
 
 yamlfix "$@" >/tmp/yamlfix_output 2>&1
 
