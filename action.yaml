@@ -15,6 +15,7 @@ outputs:
     description: Value is "true", if yamlfix changes detected
 permissions:
   contents: write
+  pull-requests: write
 runs:
   using: docker
   image: Dockerfile
