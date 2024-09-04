@@ -22,15 +22,19 @@ jobs:
         run: |
           echo ${{ steps.get_file_changes.outputs.files }} | xargs -n 1 | grep -E "\.yml$|\.yaml$" > changed_files.txt
           yaml_files=$(cat changed_files.txt | tr '\n' ' ')
-          rm changed_files.txt
           echo "files=${yaml_files}" >> $GITHUB_OUTPUT
       - name: Yamlfix
         id: yamlfix
         uses: comfucios/yamlfix-action@v1.0.3
         with:
           files: ${{ steps.changed_yaml_files.outputs.files }}
+      - name: check git
+        run: |
+          git status
+          ls -lah
       - name: commit-changes
         if: ${{ steps.yamlfix.outputs.changed_files == 'true' }}
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Apply Yamlfix changes
+          status_options: --untracked-files=no
