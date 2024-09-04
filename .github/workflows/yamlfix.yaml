@@ -23,12 +23,12 @@ jobs:
         run: |
           echo ${{ steps.get_file_changes.outputs.files }} | xargs -n 1 | grep -E "\.yml$|\.yaml$" > changed_files.txt
           yaml_files=$(cat changed_files.txt | tr '\n' ' ')
-          echo "files=${yaml_files}" >> $GITHUB_OUTPUT
+          echo "files=${yaml_files}" >> $GITHUB_ENV
       - name: Yamlfix
         id: yamlfix
         uses: comfucios/yamlfix-action@PR-TEST2
         with:
-          files: ${{ steps.changed_yaml_files.outputs.files }}
+          files: ${{ env.files }}
       - name: check git
         run: |
           git status
