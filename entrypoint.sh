@@ -7,10 +7,7 @@ _output() {
 
 files="$@"
 
-echo "Fixing file $files"
 yamlfix $files >/tmp/yamlfix_output
-
-cat test.yaml
 
 if grep -q "0 fixed" /tmp/yamlfix_output; then
   _output "false"
