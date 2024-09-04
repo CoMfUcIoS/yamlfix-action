@@ -12,8 +12,8 @@ yamlfix $files >/tmp/yamlfix_output
 
 cat test.yaml
 
-if [ -s /tmp/yamlfix_output ]; then
-  _output "true"
-else
+if grep -q "0 fixed" /tmp/yamlfix_output; then
   _output "false"
+else
+  _output "true"
 fi
