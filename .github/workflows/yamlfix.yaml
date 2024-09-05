@@ -8,8 +8,6 @@ on:
 #   pull-requests: write
 jobs:
   will-format-files:
-    env:
-      BRANCH_NAME: ${{ github.head_ref }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,7 +18,7 @@ jobs:
           cp gh_action_test.yaml /tmp/initial_gh_action_test.yaml
       - name: Yamlfix
         id: yamlfix
-        uses: comfucios/yamlfix-action@${{ env.BRANCH_NAME }}
+        uses: comfucios/yamlfix-action@${{ github.head_ref }}
         with:
           files: gh_action_test.yaml
       - name: test if yamlfix formatted the file
