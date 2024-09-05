@@ -18,7 +18,7 @@ jobs:
           cp gh_action_test.yaml /tmp/initial_gh_action_test.yaml
       - name: Yamlfix
         id: yamlfix
-        uses: comfucios/yamlfix-action@${{ github.head_ref }}
+        uses: comfucios/yamlfix-action@${{ github.event.pull_request.head.ref }}
         with:
           files: gh_action_test.yaml
       - name: test if yamlfix formatted the file
