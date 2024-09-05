@@ -1,30 +1,25 @@
 ---
 name: Yamlfix
 on:
-  pull_request:
+  push:
     branches: [main]
-# permissions:
-#   contents: write
-#   pull-requests: write
 jobs:
   will-format-files:
-    env:
-      BRANCH_NAME: ${{ github.head_ref }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: create yaml file to format
         run: |
-        echo 'name: "test file' > gh_action_test.yaml 
-        cp gh_action_test.yaml /tmp/initial_gh_action_test.yaml
+          echo 'name: "test file"' > gh_action_test.yaml 
+          cp gh_action_test.yaml /tmp/initial_gh_action_test.yaml
       - name: Yamlfix
         id: yamlfix
-        uses: comfucios/yamlfix-action@${{ env.BRANCH_NAME }}
+        uses: comfucios/yamlfix-action@main
         with:
           files: gh_action_test.yaml
       - name: test if yamlfix formatted the file
-        run: |   
+        run: |-
           if diff /tmp/initial_gh_action_test.yaml gh_action_test.yaml > /dev/null; then
             echo "No changes detected in gh_action_test.yaml"
             exit 1
