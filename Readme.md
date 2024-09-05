@@ -2,7 +2,19 @@
 
 A Github action to fix yaml files.
 
-# Usage
+## Inputs
+
+## `files`
+
+**Required** The files to fix (space separated relative paths)
+
+## Outputs
+
+## `changed_files`
+
+`true` if any files were changed, `false` otherwise
+
+## Example Usage
 
 Example workflow to run the action on push:
 
